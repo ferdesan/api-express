@@ -26,5 +26,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Run gerar dist
+        run: npx tsc
+
       - name: Run starts
         run: npm run start
