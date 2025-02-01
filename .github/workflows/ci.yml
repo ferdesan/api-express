@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-node@v2
 
         with:
-          node-version: '14'
+          node-version: '22'
 
       - name: Install dependencies
         run: npm install
@@ -30,4 +30,4 @@ jobs:
         run: npx tsc
 
       - name: Run starts
-        run: npm run start
+        run: npm run start 
