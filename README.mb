@@ -1,0 +1,28 @@
+## Requisitos
+ 
+- Node.js 22 ou superior
+- confirmar versão 
+node -v
+
+## Sequencia para criar o projeto
+- criando o arquivo package
+npm init
+
+## Instalar Express para gerenciar as requisições, rotas e URLs
+npm i express
+
+## Instalar pacotes para suporte ao TypeScript
+npm i --save-dev @types/express
+npm i --save-dev @types/node
+
+## Instalar o comilador do projeto com TypeScript e reiniciar o projeto quando o arquivo for modificado
+npm i --save-dev ts-node
+
+## Gerar o arquivo de configuração para o TypeScript
+npx tsc --init
+
+## compilar o projeto TypeScript
+npx tsc
+
+## inicar a aplicação com o arquivo gerado com o Node.js
+node dist/index.js
