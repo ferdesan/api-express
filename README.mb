@@ -27,6 +27,14 @@
 ## Inicar a aplicação com o arquivo gerado com o Node.js
 - node dist/index.js
 
+## Install the npm package: conectr o node ao mysql
+- npm install typeorm --save
+
+## You need to install reflect-metadata shim: biblioteca para adicionar metadata
+- npm install reflect-metadata --save
+
+## Install a database driver: for MySQL or MariaDB
+- npm install mysql2 --save (you can install mysql2 instead as well)
 
 ## …or create a new repository on the command line
 echo "# api-express" >> README.md
