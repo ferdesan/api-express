@@ -19,7 +19,7 @@ jobs:
       DB_PORT: 3306
       DB_DATABASE: test
       DB_USERNAME: root
-      DB_PASSWORD: 1854
+      DB_PASSWORD: 
 
     steps:
       - name: Set up MySQL
