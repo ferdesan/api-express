@@ -17,16 +17,15 @@ jobs:
       DB_CONNECTION: mysql
       DB_HOST: localhost
       DB_PORT: 3306
-      DB_DATABASE: test
-      DB_USERNAME: root
-      DB_PASSWORD: 
+      DB_DATABASE: test_db
+      DB_USER: root
+      DB_PASSWORD: 1854
 
     steps:
-      - name: Set up MySQL
+      - name: Start MySQL
         run: |
-          sudo systemctl start mysql
-          mysql -e 'CREATE DATABASE test;' -uroot -proot
-          mysql -e 'SHOW DATABASES;' -uroot -proot
+          sudo /etc/init.d/mysql start
+          mysql -e "CREATE DATABASE IF NOT EXISTS $DB_DATABASE;" -u$DB_USER -p$DB_PASSWORD
 
       - name: Checkout code
         uses: actions/checkout@v2
@@ -35,7 +34,7 @@ jobs:
         uses: actions/setup-node@v2
 
         with:
-          node-version: '22'
+          node-version: "22"
 
       - name: Install dependencies
         run: npm install
@@ -44,4 +43,4 @@ jobs:
         run: npx tsc
 
       - name: Run starts
-        run: npm run start 
+        run: npm run start
