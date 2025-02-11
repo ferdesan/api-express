@@ -22,13 +22,13 @@ jobs:
       DB_PASSWORD: 1854
 
     steps:
-      - name: Start MySQL
-        run: |
-          sudo /etc/init.d/mysql start
-          mysql -e "CREATE DATABASE IF NOT EXISTS $DB_DATABASE;" -u$DB_USER -p$DB_PASSWORD
-
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Start MySQL
+        run: |
+          sudo systemctl start mysql
+          mysql -e "CREATE DATABASE IF NOT EXISTS $DB_DATABASE;" -u$DB_USER -p$DB_PASSWORD
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
