@@ -15,7 +15,7 @@ jobs:
 
     env:
       DB_CONNECTION: mysql
-      DB_HOST: localhost
+      DB_HOST: 127.0.0.1
       DB_PORT: 3306
       DB_DATABASE: test
       DB_USER: root
@@ -29,7 +29,7 @@ jobs:
         run: |
           sudo systemctl start mysql
           mysql -e "CREATE DATABASE IF NOT EXISTS $DB_DATABASE;" -u$DB_USER -p$DB_PASSWORD
-          mysql -h 127.0.0.1 --port $DB_PORT -e "SHOW DATABASES;" -u$DB_USER -p$DB_PASSWORD
+          mysql -h $DB_HOST --port $DB_PORT -e "SHOW DATABASES;" -u$DB_USER -p$DB_PASSWORD
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
