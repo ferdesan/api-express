@@ -43,5 +43,11 @@ jobs:
       - name: Run gerar dist
         run: npx tsc
 
+      - name: Criar as migrations
+        run: npx typeorm migration:create src/migration/CreateUsersTable
+
+      - name: Executar as migrations para crias as tabelas no banco
+        run: npx typeorm migration:run -d dist/data-source.js
+
       - name: Run starts
         run: npm run start
