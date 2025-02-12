@@ -51,3 +51,6 @@ jobs:
 
       - name: Run starts
         run: npm run start
+
+      - name: Stop node js
+        run: pkill -f node
