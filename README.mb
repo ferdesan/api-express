@@ -10,10 +10,12 @@
 
 ## Instalar Express para gerenciar as requisições, rotas e URLs
 - npm i express
+- npm install jest supertest --save-dev
 
 ## Instalar pacotes para suporte ao TypeScript
 - npm i --save-dev @types/express
 - npm i --save-dev @types/node
+- npm i --save-dev @types/jest
 
 ## Instalar o comilador do projeto com TypeScript e Reiniciar o projeto quando o arquivo for modificado
 - npm i --save-dev ts-node
@@ -71,4 +73,7 @@ git branch -M master
 git remote add origin https://github.com/ferdesan/api-express.git
 git push -u origin master
 
-save
+```
+## exemplo test
+- https://blog.logrocket.com/ci-cd-node-js-github-actions/
+```
