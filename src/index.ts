@@ -7,11 +7,6 @@ const app = express();
 
 app.use(express.json());
 
-// criar uma rota GET do app principal
-app.get("/", (req: Request, res: Response) => {
-  res.status(200).send("Seja bem vindo! a página home.");
-});
-
 //acessando as rotas de UsersControllers
 app.use("/", UsersControllers);
 

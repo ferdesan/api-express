@@ -77,3 +77,15 @@ git push -u origin master
 ## exemplo test
 - https://blog.logrocket.com/ci-cd-node-js-github-actions/
 ```
+
+feat - introduz um novo recurso
+fix - corrige um bug em sua base de código
+chore -  indica mudanças no projeto que não afeta o sistema ou arquivos de testes. São mudanças de desenvolvimento sem alteração do código de produção
+refactor - refatorando o código de produção, por exemplo, renomeando uma variável
+test - adicionando testes ausentes, testes de refatoração; nenhuma alteração no código de produção
+build - usado para indicar mudanças que executaram o processo de construção do projeto ou dependências externas.
+ci -  utilizado para mudanças nos arquivos de configuração de CI
+docs - alterações na documentação
+style - formatação, falta de ponto e vírgula, etc; nenhuma alteração no código de produção
+perf - indica uma alteração que melhorou a performance do sistema.
+revert - indica a reverão de um commit anterior.

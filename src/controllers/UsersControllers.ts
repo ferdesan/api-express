@@ -6,6 +6,21 @@ import { User } from "../entity/User";
 
 const router = express.Router();
 
+router.get("/users", async (req: Request, res: Response) => {
+  try {
+    //crie uma instancia do repositorio
+    const userRepository = AppDataSource.getRepository(User);
+
+    //buscar todos os registros de usuários
+    const users = await userRepository.find();
+
+    res.status(200).json(users);
+    return;
+  } catch (error) {
+    res.status(500).json({ message: "Erro ao buscar os usuários!", error });
+  }
+});
+
 router.post("/users", async (req: Request, res: Response) => {
   try {
     var data = req.body;
@@ -42,6 +57,11 @@ router.post("/users", async (req: Request, res: Response) => {
 
 router.get("/test", (req: Request, res: Response) => {
   res.status(200).send("Seja bem vindo a nossa api[GET] test");
+});
+
+// criar uma rota GET do app principal
+router.get("/", (req: Request, res: Response) => {
+  res.status(200).send("Seja bem vindo! a página home.");
 });
 
 export default router;
