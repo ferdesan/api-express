@@ -6,6 +6,30 @@ import { User } from "../entity/User";
 
 const router = express.Router();
 
+type UserRequest = {
+  id: string;
+};
+
+router.get("/users/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    //crie uma instancia do repositorio
+    const userRepository = AppDataSource.getRepository(User);
+
+    //buscar um registro de usuário por id
+    const user = await userRepository.findOneBy({ id: parseInt(id) });
+
+    if (!user) {
+      res.status(404).json({ message: "Usuário não encontrado!" });
+      return;
+    }
+    res.status(200).json({ user });
+  } catch (error) {
+    res.status(500).json({ message: "Erro ao buscar o usuário!", error });
+  }
+});
+
 router.get("/users", async (req: Request, res: Response) => {
   try {
     //crie uma instancia do repositorio
