@@ -1,14 +1,63 @@
 import express, { Request, Response } from "express";
-
+import { Not } from "typeorm";
 import { AppDataSource } from "../data-source";
-
 import { User } from "../entity/User";
 
 const router = express.Router();
 
-type UserRequest = {
-  id: string;
-};
+router.put("/users/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const data = req.body;
+
+    //crie uma instancia do repositorio
+    const userRepository = AppDataSource.getRepository(User);
+
+    //buscar um registro de usuário por id
+    const user = await userRepository.findOneBy({ id: parseInt(id) });
+
+    //validar se o usuário existe
+    if (!user) {
+      res.status(404).json({
+        message:
+          "Usuário não encontrado no banco de dados, verifique os dados ou tente novamente mais tarde!",
+      });
+      return;
+    }
+
+    //verificar se o email já existe no banco de dados
+    const existingUser = await userRepository.findOne({
+      where: {
+        email: data.email,
+        id: Not(parseInt(id)),
+      },
+    });
+
+    //validar se o email já existe no banco de dados
+    if (existingUser) {
+      res.status(400).json({
+        message: "Este email já existe no cadastro de outro usuário!",
+      });
+      return;
+    }
+
+    //atualizar os dados do usuário
+    userRepository.merge(user, data);
+
+    //salvar os dados atualizados
+    const updatedUser = await userRepository.save(user);
+
+    //retornar os dados atualizados
+    res.status(200).json({
+      message: "Dados do usuário atualizado com sucesso!",
+      user: updatedUser,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Erro ao atualizar os dados do usuário!", error });
+  }
+});
 
 router.get("/users/:id", async (req: Request, res: Response) => {
   try {
@@ -20,6 +69,7 @@ router.get("/users/:id", async (req: Request, res: Response) => {
     //buscar um registro de usuário por id
     const user = await userRepository.findOneBy({ id: parseInt(id) });
 
+    //validar se o usuário existe
     if (!user) {
       res.status(404).json({ message: "Usuário não encontrado!" });
       return;
@@ -38,10 +88,13 @@ router.get("/users", async (req: Request, res: Response) => {
     //buscar todos os registros de usuários
     const users = await userRepository.find();
 
+    //validar se existe registros de usuários
     res.status(200).json(users);
     return;
   } catch (error) {
-    res.status(500).json({ message: "Erro ao buscar os usuários!", error });
+    res
+      .status(500)
+      .json({ message: "Erro ao buscar dados dos usuários!", error });
   }
 });
 
@@ -65,9 +118,13 @@ router.post("/users", async (req: Request, res: Response) => {
       return;
     }
 
+    //criar um novo registro de usuário
     const newUser = userRepository.create(data);
+
+    //salvar o novo registro de usuário
     await userRepository.save(newUser);
 
+    //retornar os dados do novo usuário cadastrado
     res.status(201).json({
       message: "Usuário cadastrado com sucesso!",
       user: newUser,
@@ -79,6 +136,7 @@ router.post("/users", async (req: Request, res: Response) => {
   }
 });
 
+// criar uma rota GET do app principal
 router.get("/test", (req: Request, res: Response) => {
   res.status(200).send("Seja bem vindo a nossa api[GET] test");
 });
