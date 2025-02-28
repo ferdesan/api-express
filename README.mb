@@ -20,15 +20,6 @@
 ## Instalar o comilador do projeto com TypeScript e Reiniciar o projeto quando o arquivo for modificado
 - npm i --save-dev ts-node
 
-## Gerar o arquivo de configuração para o TypeScript
-- npx tsc --init
-
-## Compilar o projeto TypeScript
-- npx tsc
-
-## Inicar a aplicação com o arquivo gerado com o Node.js
-- node dist/index.js
-
 ## Install the npm package: conectr o node ao mysql
 - npm install typeorm --save
 
@@ -63,6 +54,15 @@ compilar e depois executar as migrations para criar as tabelas:
 npx typeorm migration:run -d dist/data-source.js
 ```
 ```
+
+## Gerar o arquivo de configuração para o TypeScript
+- npx tsc --init
+
+## Compilar o projeto TypeScript
+- npx tsc
+
+## Inicar a aplicação com o arquivo gerado com o Node.js
+- node dist/index.js
 
 ## …or create a new repository on the command line
 echo "# api-express" >> README.md
