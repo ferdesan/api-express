@@ -5,6 +5,11 @@ import { User } from "../entity/User";
 
 const router = express.Router();
 
+interface UserProps {
+  id: number;
+}  
+
+
 router.put("/users/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
