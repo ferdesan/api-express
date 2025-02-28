@@ -136,6 +136,33 @@ router.post("/users", async (req: Request, res: Response) => {
   }
 });
 
+router.delete("/users/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    //crie uma instancia do repositorio
+    const userRepository = AppDataSource.getRepository(User);
+
+    //buscar um registro de usuário por id
+    const user = await userRepository.findOneBy({ id: parseInt(id) });
+
+    //validar se o usuário existe
+    if (!user) {
+      res.status(404).json({ message: "Usuário não encontrado!" });
+      return;
+    }
+
+    //remover o registro do usuário
+    await userRepository.remove(user);
+
+    //retornar uma mensagem de sucesso
+    res.status(200).json({ message: "Usuário removido com sucesso!" });
+  } catch (error) {
+    res.status(500).json({ message: "Erro ao remover o usuário!", error });
+  }
+});
+
+
 // criar uma rota GET do app principal
 router.get("/test", (req: Request, res: Response) => {
   res.status(200).send("Seja bem vindo a nossa api[GET] test");
