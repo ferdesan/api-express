@@ -3,14 +3,35 @@ import { Not } from "typeorm";
 import { AppDataSource } from "../data-source";
 import { User } from "../entity/User";
 
-const router = express.Router();
+export const routerUsers = express.Router();
 
-interface UserProps {
-  id: number;
-}  
+routerUsers.delete("/users/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
 
+    //crie uma instancia do repositorio
+    const userRepository = AppDataSource.getRepository(User);
 
-router.put("/users/:id", async (req: Request, res: Response) => {
+    //buscar um registro de usuário por id
+    const user = await userRepository.findOneBy({ id: parseInt(id) });
+
+    //validar se o usuário existe
+    if (!user) {
+      res.status(404).json({ message: "Usuário não encontrado!" });
+      return;
+    }
+
+    //remover o registro do usuário
+    await userRepository.remove(user);
+
+    //retornar uma mensagem de sucesso
+    res.status(200).json({ message: "Usuário removido com sucesso!" });
+  } catch (error) {
+    res.status(500).json({ message: "Erro ao remover o usuário!", error });
+  }
+});
+
+routerUsers.put("/users/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const data = req.body;
@@ -64,7 +85,7 @@ router.put("/users/:id", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/users/:id", async (req: Request, res: Response) => {
+routerUsers.get("/users/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
@@ -85,7 +106,7 @@ router.get("/users/:id", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/users", async (req: Request, res: Response) => {
+routerUsers.get("/users", async (req: Request, res: Response) => {
   try {
     //crie uma instancia do repositorio
     const userRepository = AppDataSource.getRepository(User);
@@ -103,7 +124,7 @@ router.get("/users", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/users", async (req: Request, res: Response) => {
+routerUsers.post("/users", async (req: Request, res: Response) => {
   try {
     var data = req.body;
 
@@ -141,41 +162,16 @@ router.post("/users", async (req: Request, res: Response) => {
   }
 });
 
-router.delete("/users/:id", async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-
-    //crie uma instancia do repositorio
-    const userRepository = AppDataSource.getRepository(User);
-
-    //buscar um registro de usuário por id
-    const user = await userRepository.findOneBy({ id: parseInt(id) });
-
-    //validar se o usuário existe
-    if (!user) {
-      res.status(404).json({ message: "Usuário não encontrado!" });
-      return;
-    }
-
-    //remover o registro do usuário
-    await userRepository.remove(user);
-
-    //retornar uma mensagem de sucesso
-    res.status(200).json({ message: "Usuário removido com sucesso!" });
-  } catch (error) {
-    res.status(500).json({ message: "Erro ao remover o usuário!", error });
-  }
-});
-
-
-// criar uma rota GET do app principal
-router.get("/test", (req: Request, res: Response) => {
+/**
+ * criar uma rota GET do app principal
+ */
+routerUsers.get("/test", (req: Request, res: Response) => {
   res.status(200).send("Seja bem vindo a nossa api[GET] test");
 });
 
 // criar uma rota GET do app principal
-router.get("/", (req: Request, res: Response) => {
-  res.status(200).send("Seja bem vindo! a página home.");
+routerUsers.get("/", (req: Request, res: Response) => {
+  res.status(200).send("Seja bem vindo! a página home de nossa API.");
 });
 
-export default router;
+//export default routerUsers;

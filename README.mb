@@ -18,7 +18,8 @@
 - npm i --save-dev @types/jest
 
 ## Instalar o comilador do projeto com TypeScript e Reiniciar o projeto quando o arquivo for modificado
-- npm i --save-dev ts-node
+- npm i --save-dev ts-node nodemon
+- npm i ts-node nodemon -D
 
 ## Install the npm package: conectr o node ao mysql
 - npm install typeorm --save

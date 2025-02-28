@@ -1,6 +1,6 @@
 import express from "express";
 
-import UsersControllers from "./controllers/UsersControllers";
+import { routerUsers } from "./controllers/UsersControllers";
 
 // criar a aplicação express
 const app = express();
@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 
 //acessar as rotas de UsersControllers
-app.use("/", UsersControllers);
+app.use("/", routerUsers);
 
 //iniciar o servidor na porta 8090
 const port = process.env.PORT || 8090;
