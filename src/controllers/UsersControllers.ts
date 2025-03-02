@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { Not } from "typeorm";
-import { AppDataSource } from "../data-source";
+import { AppDataSource } from "../config/data-source";
 import { User } from "../entity/User";
 
 export const routerUsers = express.Router();
@@ -108,13 +108,19 @@ routerUsers.get("/users/:id", async (req: Request, res: Response) => {
 
 routerUsers.get("/users", async (req: Request, res: Response) => {
   try {
-    //crie uma instancia do repositorio
+    /**
+     * criar uma instancia do repositorio
+     */
     const userRepository = AppDataSource.getRepository(User);
 
-    //buscar todos os registros de usuários
+    /**
+     * buscar todos os registros de usuários
+     */
     const users = await userRepository.find();
 
-    //validar se existe registros de usuários
+    /**
+     * validar se existe registros de usuários
+     */
     res.status(200).json(users);
     return;
   } catch (error) {
@@ -173,5 +179,3 @@ routerUsers.get("/test", (req: Request, res: Response) => {
 routerUsers.get("/", (req: Request, res: Response) => {
   res.status(200).send("Seja bem vindo! a página home de nossa API.");
 });
-
-//export default routerUsers;

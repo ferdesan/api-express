@@ -1,11 +1,6 @@
-import express from "express";
+import {app} from "./app";
 
 import { routerUsers } from "./controllers/UsersControllers";
-
-// criar a aplicação express
-const app = express();
-
-app.use(express.json());
 
 //acessar as rotas de UsersControllers
 app.use("/", routerUsers);
