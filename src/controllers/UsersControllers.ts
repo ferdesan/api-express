@@ -1,11 +1,11 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import { Not } from "typeorm";
 import { AppDataSource } from "../config/data-source";
 import { User } from "../entity/User";
 
-export const routerUsers = express.Router();
+class UsersControllers{
 
-routerUsers.delete("/users/:id", async (req: Request, res: Response) => {
+static UsersDelete = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
@@ -29,9 +29,9 @@ routerUsers.delete("/users/:id", async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({ message: "Erro ao remover o usuário!", error });
   }
-});
+};
 
-routerUsers.put("/users/:id", async (req: Request, res: Response) => {
+static UsersEdit = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const data = req.body;
@@ -83,9 +83,9 @@ routerUsers.put("/users/:id", async (req: Request, res: Response) => {
       .status(500)
       .json({ message: "Erro ao atualizar os dados do usuário!", error });
   }
-});
+};
 
-routerUsers.get("/users/:id", async (req: Request, res: Response) => {
+static UsersId = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
@@ -104,9 +104,9 @@ routerUsers.get("/users/:id", async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({ message: "Erro ao buscar o usuário!", error });
   }
-});
+};
 
-routerUsers.get("/users", async (req: Request, res: Response) => {
+static UsersList = async (req: Request, res: Response) => {
   try {
     /**
      * criar uma instancia do repositorio
@@ -128,9 +128,9 @@ routerUsers.get("/users", async (req: Request, res: Response) => {
       .status(500)
       .json({ message: "Erro ao buscar dados dos usuários!", error });
   }
-});
+};
 
-routerUsers.post("/users", async (req: Request, res: Response) => {
+static UsersCreate = async (req: Request, res: Response) => {
   try {
     var data = req.body;
 
@@ -166,16 +166,7 @@ routerUsers.post("/users", async (req: Request, res: Response) => {
       .status(500)
       .json({ message: "Erro ao salvar o cadastro de usuário!", error });
   }
-});
+};
+};
 
-/**
- * criar uma rota GET do app principal
- */
-routerUsers.get("/test", (req: Request, res: Response) => {
-  res.status(200).send("Seja bem vindo a nossa api[GET] test");
-});
-
-// criar uma rota GET do app principal
-routerUsers.get("/", (req: Request, res: Response) => {
-  res.status(200).send("Seja bem vindo! a página home de nossa API.");
-});
+export default UsersControllers;

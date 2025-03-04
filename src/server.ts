@@ -1,18 +1,17 @@
-import { app } from "./app";
+import express from "express"
 
-import { routerUsers } from "./controllers/UsersControllers";
+import routes from "./routes";
 
-/**
- * acessar as rotas de UsersControllers
- * @param {string} path - caminho da rota
- * @param {Router} routerUsers - rota de UsersControllers
- */
-app.use("/", routerUsers);
+// criar a aplicaão express
+export const app = express();
 
-/**
- * iniciar o servidor na porta 8090
- * @param {number} port - porta do servidor
- */
+// configurar a aplicação para aceitar JSON
+app.use(express.json());
+
+// configurar a aplicação para aceitar urlencoded
+app.use("/", routes);
+
+// iniciar o servidor
 const port = process.env.PORT || 8090;
 app.listen(port, () => {
   console.log(
