@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express";
-import users from "./users";
+import user from "./user";
 
 const routes = Router();
 
-routes.use("/", users);
+routes.use("/", user);
 
 // criar uma rota GET do app principal
 routes.get("/", (req: Request, res: Response) => {

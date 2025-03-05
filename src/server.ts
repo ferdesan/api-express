@@ -1,3 +1,5 @@
+import { AppDataSource } from "./config/data-source";
+
 import express from "express"
 
 import routes from "./routes";
@@ -18,11 +20,18 @@ app.listen(port, () => {
     " O servidor foi iniciado na porta 8090 com sucesso!: http://localhost:8090"
   );
 
-  /**
-   * encerrar o servidor
-   */
+  // encerrar o servidor
   process.on("SIGINT", () => {
     console.log("Servidor encerrado");
     process.exit();
   });
 });
+
+// iniciar conexão com o banco de dados
+AppDataSource.initialize()
+  .then(() => {
+    console.log("Conexão com o banco de dados realizado com sucesso");
+  })
+  .catch((error) => {
+    console.log("Erro ao tentar acessar banco de dados", error);
+  });
