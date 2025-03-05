@@ -4,8 +4,7 @@ import { Not } from "typeorm";
 import { AppDataSource } from "../config/data-source";
 import { User } from "../entity/User";
 
-class UserControllers{
-
+class UserControllers {
   static UserCreate = async (req: Request, res: Response) => {
     try {
       var data = req.body;
@@ -44,7 +43,7 @@ class UserControllers{
     }
   };
 
-   static UserId = async (req: Request, res: Response) => {
+  static UserId = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
 
@@ -80,7 +79,7 @@ class UserControllers{
       if (!user) {
         res.status(404).json({
           message:
-            "Usuário não encontrado no banco de dados, verifique os dados ou tente novamente mais tarde!",
+            "Usuário não encontrado, verifique todos os dados ou tente novamente mais tarde!",
         });
         return;
       }
@@ -157,9 +156,7 @@ class UserControllers{
        */
       const users = await userRepository.find();
 
-      /**
-       * validar se existe registros de usuários
-       */
+      //retornar os dados dos usuários
       res.status(200).json(users);
       return;
     } catch (error) {
@@ -168,7 +165,6 @@ class UserControllers{
         .json({ message: "Erro ao buscar dados dos usuários!", error });
     }
   };
-
-};
+}
 
 export default UserControllers;

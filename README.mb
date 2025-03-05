@@ -47,8 +47,9 @@ exemplo:
 npx typeorm migration:create src/migration/<nome-da-migration>
 ```
 ```
-criar tabela users
+executar comandos para criar as tabelas: 
 npx typeorm migration:create src/migration/CreateUsersTable
+npx typeorm migration:create src/migration/CreateEmpresaTable
 ```
 ```
 compilar e depois executar as migrations para criar as tabelas: 
