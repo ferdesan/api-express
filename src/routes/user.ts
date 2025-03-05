@@ -1,12 +1,12 @@
 import { Router } from "express";
-import UsersControllers from "../controllers/UsersControllers";
+import UserControllers from "../controllers/UserControllers";
 
 const user = Router();
 
-user.get("/users", UsersControllers.UserList);
-user.get("/users/:id", UsersControllers.UserId);
-user.post("/users", UsersControllers.UserCreate);    
-user.put("/users/:id", UsersControllers.UserEdit);
-user.delete("/users/:id", UsersControllers.UserDelete);
+user.get("/users", UserControllers.UserList);
+user.get("/users/:id", UserControllers.UserId);
+user.post("/users", UserControllers.UserCreate);    
+user.put("/users/:id", UserControllers.UserEdit);
+user.delete("/users/:id", UserControllers.UserDelete);
 
 export default user;

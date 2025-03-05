@@ -19,8 +19,6 @@ app.listen(port, () => {
   console.log(
     " O servidor foi iniciado na porta 8090 com sucesso!: http://localhost:8090"
   );
-
-  // encerrar o servidor
   process.on("SIGINT", () => {
     console.log("Servidor encerrado");
     process.exit();
