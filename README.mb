@@ -91,3 +91,9 @@ docs - alterações na documentação
 style - formatação, falta de ponto e vírgula, etc; nenhuma alteração no código de produção
 perf - indica uma alteração que melhorou a performance do sistema.
 revert - indica a reverão de um commit anterior.
+
+# Construa a imagem Docker
+docker-compose build
+
+# Inicie os containers
+docker-compose up
