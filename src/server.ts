@@ -1,6 +1,6 @@
 import { AppDataSource } from "./config/data-source";
 
-import express from "express"
+import express from "express";
 
 import routes from "./routes";
 
@@ -14,10 +14,10 @@ app.use(express.json());
 app.use("/", routes);
 
 // iniciar o servidor
-const port = process.env.PORT || 8090;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(
-    " O servidor foi iniciado na porta 8090 com sucesso!: http://localhost:8090"
+    " O servidor foi iniciado na porta 3000 com sucesso!: http://localhost:3000"
   );
   process.on("SIGINT", () => {
     console.log("Servidor encerrado");
