@@ -2,7 +2,7 @@
 FROM node:14
 
 # Crie e configure o diretório de trabalho
-WORKDIR /app
+WORKDIR /api-express
 
 # Copie o package.json e o package-lock.json
 COPY package*.json ./
